@@ -35,15 +35,38 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-curr_player = Player(room['outside'], input("What is your name? : "))
+player = Player(input("What is your name? : "), room['outside'])
 
 # Write a loop that:
 #
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
-#
+def compass(direction):
+    if direction == "n":
+        return "North"
+    elif direction == "s":
+        return "South"
+    elif direction == "e":
+        return "East"
+    elif direction == "w":
+        return "West"
+
+new_room = None
+
+def enter_room(player, direction):
+    if direction == "n":
+        new_room = player.location.n_to
+    elif direction == "s":
+        new_room = player.location.s_to
+    elif direction == "e":
+        new_room = player.location.e_to
+    elif direction == "w":
+        new_room = player.location.w_to
+
+if new_room == None:
+    print("You've hit a dead end. Go a different direction")
+else:
+    player.location = new_room
 # If the user enters "q", quit the game.

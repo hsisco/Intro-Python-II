@@ -25,14 +25,14 @@ class Player:
             print("\nYou hit a dead end. Go a different direction.")
 
     def pickup(self, this_item):
-        for i in self.location.items:
-            if i.name == this_item:
-                self.items.append(i)
-                self.location.items.remove(i)
-                print(f"You now have {this_item}!")
-            else:
-                if len(self.location.items) == 0:
-                    print(f"\nThe {self.location.name} is empty. There's nothing for you here.")
+        if len(self.location.items) == 0:
+            print(f"\nThe {self.location.name} is empty. There's nothing for you here.")
+        else:
+            for i in self.location.items:
+                if i.name == this_item:
+                    self.items.append(i)
+                    self.location.items.remove(i)
+                    print(f"You now have {this_item}!")
     
     def drop(self, this_item):
         if len(self.items) == 0:
